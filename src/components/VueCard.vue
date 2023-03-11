@@ -36,8 +36,7 @@ defineProps({
     <div id="div2">
         <img v-bind:src=photo v-if="photo" class="img">
         <img src="/src/assets/images/vopros.png" v-else class="img">
-        <b v-if="name" class="bName">{{ name }}</b>
-        <b v-else class="bName">Имя</b>
+        <b class="bName">{{ firstName }} {{ surname }}</b>
         <b v-if="about" class="bAbout">{{ about }}</b>
         <b v-else class="bAbout">О себе</b>
     </div>
@@ -48,17 +47,17 @@ defineProps({
     </div>
     <div id="div4">
         <button class="butDiv4" @click="show">Все записи</button>
-        <button class="butDiv4">Мои записи</button>
-        <button class="butDiv4">Архив записей</button>
+        <button class="butDiv4" @click="sqr(4)">Мои записи</button>
+        <button class="butDiv4" @click="changeText">Архив записей</button>
         <hr class="hr2">
         <img v-bind:src=photo v-if="photo" class="img2">
         <img src="/src/assets/images/vopros.png" v-else class="img2">
-        <b v-if="name" class="bName2">{{ name }}</b>
-        <b v-else class="bName2">Имя</b>
+        <b class="bName2">{{ fullname }}</b>
     </div>
     <div>
         <div class="div5">
-            <img v-for="image in menuImages" class="img3">
+            <img v-for="image in menuImages" class="img3" :src="image.src">
+            <h3>{{ text }}</h3>
         </div>
     </div>
 </template>
@@ -117,7 +116,10 @@ export default {
                 }
 
             ],
-            alertMessage: 'привет'
+            alertMessage: 'привет',
+            text: 'bla',
+            firstName: 'Андрей',
+            surname: 'Иванов'
         }
     },
     methods: {
@@ -157,6 +159,17 @@ export default {
                     break;
 
             }
+        },
+        sqr: function (number) {
+            alert(number * number);
+        },
+        changeText: function () {
+            this.surname = 'Петров';
+        }
+    },
+    computed: {
+        fullname: function () {
+            return this.surname+' '+this.firstName[0];
         }
     }
 }
@@ -232,6 +245,12 @@ export default {
     top: 390px;
     margin: 15px;
     color: white;
+}
+
+.div5 {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 .bName {
