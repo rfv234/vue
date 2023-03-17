@@ -47,6 +47,26 @@ export default {
                     name: 'Гранаты',
                     price: 300,
                     count: 0
+                },
+                {
+                    name: 'Сливы',
+                    price: 80,
+                    count: 0
+                },
+                {
+                    name: 'Арбузы',
+                    price: 450,
+                    count: 0
+                },
+                {
+                    name: 'Апельсины',
+                    price: 150,
+                    count: 0
+                },
+                {
+                    name: 'Мандарины',
+                    price: 100,
+                    count: 0
                 }
             ]
         }
@@ -62,10 +82,19 @@ export default {
         }
     },
     computed: {
-        result: function () {
+        result: function (good) {
             let summa = 0;
-            for (let i = 0; i < this.goods.length; i++) {
-                summa += this.goods[i].price * this.goods[i].count;
+            let discount = 30;
+            if (good.count > 3) {
+                let result_discount = good.price - discount;
+                for (let i = 0; i < this.goods.length; i++) {
+                    summa += result_discount * this.goods[i].count;
+                }
+            }
+            else {
+                for (let i = 0; i < this.goods.length; i++) {
+                    summa += this.goods[i].price * this.goods[i].count;
+                }
             }
             return summa;
         }
