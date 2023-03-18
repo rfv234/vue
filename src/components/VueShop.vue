@@ -2,8 +2,9 @@
     <table>
         <tr>
             <td>Название</td>
-            <td>Цена</td>
+            <td>Цена за штуку</td>
             <td>Количество</td>
+            <td>Стоимость</td>
         </tr>
         <tr v-for="good in goods">
             <td>
@@ -17,9 +18,23 @@
                 {{ good.count }}
                 <button @click="removeGood(good)">-</button>
             </td>
+            <td>
+                {{ good.count * good.price }}
+            </td>
         </tr>
     </table>
-    <h3>Итого: {{ result }}</h3>
+    <h3>Итого (с учетом скидок): {{ result }}</h3>
+    <br>
+    <hr>
+    <br>
+    <div v-if="cart.length">
+        <h4>Чек</h4>
+        <ul>
+            <li v-for="good in cart">
+                {{ good.name }} - {{ good.count }}
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -82,21 +97,28 @@ export default {
         }
     },
     computed: {
-        result: function (good) {
+        result: function () {
             let summa = 0;
-            let discount = 30;
-            if (good.count > 3) {
-                let result_discount = good.price - discount;
-                for (let i = 0; i < this.goods.length; i++) {
-                    summa += result_discount * this.goods[i].count;
-                }
-            }
-            else {
-                for (let i = 0; i < this.goods.length; i++) {
+            for (let i = 0; i < this.goods.length; i++) {
+                if (this.goods[i].count >= 3) {
+                    summa += this.goods[i].price * this.goods[i].count * 0.85;
+                } else {
                     summa += this.goods[i].price * this.goods[i].count;
                 }
             }
+            if (summa >= 2000) {
+                summa *= 0.7;
+            }
             return summa;
+        },
+        cart: function () {
+            let goodsInCart = [];
+            for (let i = 0; i < this.goods.length; i++) {
+                if (this.goods[i].count > 0) {
+                    goodsInCart.push(this.goods[i]);
+                }
+            }
+            return goodsInCart;
         }
     }
 }

@@ -2,6 +2,8 @@
 import {RouterLink, RouterView} from 'vue-router'
 import VueCard from "./components/VueCard.vue";
 import VueShop from "./components/VueShop.vue";
+import VueTasks from "./components/VueTasks.vue";
+
 
 </script>
 
@@ -11,7 +13,8 @@ import VueShop from "./components/VueShop.vue";
         <div class="wrapper">
 <!--            <HelloWorld msg="You did it!" msg2="blablabla"/>-->
 <!--           <VueCard photo="/src/assets/images/chel.jpg"/>-->
-            <VueShop/>
+<!--            <VueShop/>-->
+            <VueTasks/>
         </div>
     </header>
 
