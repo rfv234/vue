@@ -7,16 +7,20 @@ import ToDoItem from "./components/ToDoItem.vue";
             <button>Добавить</button>
         </form>
         <ul>
-            <li
-                is="ToDoItem"
-                v-for="(todo, index) in todos"
-                v-bind:key="todo.id"
-                v-bind:title="todo.title"
-                v-on:remove="todos.splice(index, 1)"
-            >
-                {{todo.title}}
-            </li>
+            <div v-for="(todo, index) in todos">
+                <li
+                    v-show="todo.visible"
+                    is="ToDoItem"
+                    v-bind:key="todo.id"
+                    v-bind:title="todo.title"
+                    v-on:remove="todos.splice(index, 1)"
+                >
+                    {{ todo.title }}
+                    <button @click="hide(todo)">Удалить</button>
+                </li>
+            </div>
         </ul>
+        <button @click="showAll">Показать все</button>
     </div>
 </template>
 
@@ -28,7 +32,8 @@ export default {
             todos: [
                 {
                     id: 1,
-                    title: 'Вынести мусор'
+                    title: 'Вынести мусор',
+                    visible: true
                 }
             ],
             nextId: 2,
@@ -37,14 +42,26 @@ export default {
     },
     methods: {
         addToDo: function () {
-            this.todos.push({
-                id: this.nextId,
-                title: this.nextTitle
-            });
-            this.nextTitle = '';
-            this.nextId++;
+            if (this.nextTitle != '') {
+                this.todos.push({
+                    id: this.nextId,
+                    title: this.nextTitle,
+                    visible: true
+                });
+                this.nextTitle = '';
+                this.nextId++;
+            }
+        },
+        hide: function (todo) {
+            todo.visible = false;
+        },
+        showAll: function () {
+            for (let i = 0; i < this.todos.length; i++) {
+                this.todos[i].visible = true;
+            }
         }
-    }
+    },
+    computed: {}
 }
 </script>
 
