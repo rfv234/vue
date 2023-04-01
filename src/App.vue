@@ -4,6 +4,7 @@ import VueCard from "./components/VueCard.vue";
 import VueShop from "./components/VueShop.vue";
 import VueTasks from "./components/VueTasks.vue";
 import VueDifferentObjects from "./components/VueDifferentObjects.vue";
+import VueModel from "./components/VueModel.vue";
 
 
 
@@ -17,7 +18,8 @@ import VueDifferentObjects from "./components/VueDifferentObjects.vue";
 <!--           <VueCard photo="/src/assets/images/chel.jpg"/>-->
 <!--            <VueShop/>-->
 <!--            <VueTasks/>-->
-            <VueDifferentObjects/>
+<!--            <VueDifferentObjects/>-->
+            <VueModel/>
         </div>
     </header>
 
