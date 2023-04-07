@@ -18,8 +18,8 @@ import VueModel from "./components/VueModel.vue";
 <!--           <VueCard photo="/src/assets/images/chel.jpg"/>-->
 <!--            <VueShop/>-->
 <!--            <VueTasks/>-->
-<!--            <VueDifferentObjects/>-->
-            <VueModel/>
+                <VueDifferentObjects/>
+<!--            <VueModel/>-->
         </div>
     </header>
 
