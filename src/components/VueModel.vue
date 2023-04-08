@@ -14,7 +14,7 @@
     <hr>
     <div>
         <ul>
-            <div v-for="product in products">
+            <div v-for="product in productsToShow">
                 <li>{{ product.name }}</li>
             </div>
 
@@ -66,16 +66,25 @@ export default {
             //         }
             //     }
             // }
-            console.log(this.filters);
-            return this.products.filter(function (product) {
-                for (let i = 0; i < this.filters.length; i++) {
-                    if (product.hasOwnProperty(this.filters[i])) {
-                        return true;
-                    } else {
-                        return false;
+            console.log(this.productsToShow);
+            let filters = this.filters;
+            let filtered = [];
+            for (let i = 0; i < filters.length; i++) {
+                for (let j = 0; j < this.products.length; j++) {
+                    if (this.products[j].hasOwnProperty(filters[i])) {
+                        filtered.push(this.products[j]);
                     }
                 }
+            }
+            let names = [];
+            filtered.filter(function (item) {
+                let x = names.findIndex(product => (product.name == item.name))
+                if (x <= -1) {
+                    names.push(item);
+                }
+            return null;
             });
+            return names;
         }
     }
 }
