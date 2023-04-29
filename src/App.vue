@@ -6,6 +6,8 @@ import VueTasks from "./components/VueTasks.vue";
 import VueDifferentObjects from "./components/VueDifferentObjects.vue";
 import VueModel from "./components/VueModel.vue";
 import VueSelect from "./components/VueSelect.vue";
+import VueHomePage from "./components/VueHomePage.vue";
+
 
 </script>
 
@@ -19,7 +21,8 @@ import VueSelect from "./components/VueSelect.vue";
             <!--            <VueTasks/>-->
             <!--            <VueDifferentObjects/>-->
             <!--            <VueModel/>-->
-            <VueSelect/>
+            <!--            <VueSelect/>-->
+            <VueHomePage/>
         </div>
     </header>
 

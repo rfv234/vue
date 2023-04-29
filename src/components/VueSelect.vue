@@ -5,7 +5,7 @@
     </select>
     <div>
         <ul>
-            <li v-for="product in products[selected]">{{product}}</li>
+            <li v-for="product in products[selected]">{{ product }}</li>
         </ul>
     </div>
 
