@@ -1,6 +1,12 @@
 <template>
-    <h2 class="tasks">{{ name }}</h2>
-    <h3 class="tasks">{{ job }}</h3>
+    <table>
+        <tr>
+            <h2 class="tasks">{{ name }}</h2>
+        </tr>
+        <tr>
+            <h3 class="tasks">{{ job }}</h3>
+        </tr>
+    </table>
     <div v-for="task in tasks" class="divs">
         <strong class="tasks" v-if="task.status!=='в разработке'">{{ task.taskName }}</strong>
         <input class="tasks" v-if="task.status=='в разработке'" v-model="task.taskName">
@@ -8,6 +14,7 @@
             <span v-if="task.status!=='в разработке'">{{ task.description }}</span>
             <input v-if="task.status=='в разработке'" v-model="task.description">
         </div>
+        <hr>
         <select class="tasks" v-bind:name="task.taskName" v-model="task.status">
             <option
                 v-for="tasksStatus in tasksStatuses"
@@ -17,7 +24,9 @@
             </option>
         </select>
     </div>
-    <button @click="addTask()">Добавить задачу</button>
+    <button @click="addTask()" id="add">Добавить задачу</button>
+    <button @click="deleteTask()" id="delete">Удалить задачу</button>
+    <img src="src/assets/images/ochertanie.png" id="chel">
 </template>
 
 <script>
@@ -25,34 +34,37 @@ export default {
     name: "VueHomePage",
     data() {
         return {
-            name: 'имя сотрудника',
-            job: 'должность',
+            name: 'Имя сотрудника: ',
+            job: 'Должность: ',
             tasks: [
                 {
-                    taskName: 'тестовая задача',
-                    description: 'описание задачи',
-                    status: 'отложена',
+                    taskName: 'Тестовая задача:',
+                    description: 'Описание задачи:',
+                    status: 'Отложена',
                     user_id: 1,
                 }
             ],
             tasksStatuses: [
-                'в разработке',
-                'выполняется',
-                'на проверке',
-                'выполнена',
-                'отложена',
-                'отменена'
+                'В разработке',
+                'Выполняется',
+                'На проверке',
+                'Выполнена',
+                'Отложена',
+                'Отменена'
             ]
         }
     },
     methods: {
         addTask: function () {
             this.tasks.push({
-                taskName: 'тестовая задача ' + (this.tasks.length + 1),
-                description: 'описание задачи ',
-                status: 'в разработке',
+                taskName: 'Тестовая задача: ' + (this.tasks.length + 1),
+                description: 'Описание задачи: ',
+                status: 'В разработке',
                 user_id: 1,
             });
+        },
+        deleteTask: function () {
+            this.tasks.splice(1, 1);
         }
     }
 }
@@ -65,9 +77,22 @@ export default {
     padding: 5px;
     border: solid 2px;
     margin-top: 10px;
+    width: 50%;
 }
 
 .tasks {
     margin: 10px;
+}
+
+#chel {
+    width: 170px;
+    height: 170px;
+    position: absolute;
+    left: 60%;
+    top: 10px;
+}
+
+#add {
+    margin: 15px;
 }
 </style>
